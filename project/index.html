@@ -4,35 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script async crossorigin="anonymous" src="https://cdn.clerk.com/clerk.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Simple Website</h1>
-        <div id="user-button"></div>
-    </header>
-    <main>
-        <div id="sign-in-button"></div>
-        <div id="user-info" style="display:none;">
-            <h2>Welcome, <span id="user-name"></span>!</h2>
-        </div>
-    </main>
-
-    <script async crossorigin="anonymous" src="https://cdn.clerk.com/clerk.js"></script>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Simple Website</h1>
+        </header>
+        <main>
+            <div id="sign-in"></div>
+            <p class="signup-link">Don't have an account? <a href="https://unique-minnow-52.accounts.dev/sign-up">Sign up here</a></p>
+            <div id="user-button"></div>
+        </main>
+    </div>
     <script>
         window.addEventListener('load', async function () {
             const { Clerk } = window;
             
             await Clerk.load({
-                publishableKey: 'YOUR_CLERK_PUBLISHABLE_KEY_HERE'
+                publishableKey: 'YOUR_CLERK_PUBLISHABLE_KEY_HERE'  // Замените на ваш ключ из Clerk dashboard
             });
 
             if (Clerk.user) {
-                document.getElementById('user-info').style.display = 'block';
-                document.getElementById('user-name').textContent = Clerk.user.firstName;
-                document.getElementById('sign-in-button').style.display = 'none';
+                document.getElementById('sign-in').style.display = 'none';
+                document.querySelector('.signup-link').style.display = 'none';
             } else {
-                Clerk.mountSignIn(document.getElementById('sign-in-button'));
+                Clerk.mountSignIn(document.getElementById('sign-in'));
             }
 
             Clerk.mountUserButton(document.getElementById('user-button'));
