@@ -4,37 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Website</title>
-    <link rel="stylesheet" href="style.css">
-    <script async crossorigin="anonymous" src="https://cdn.clerk.com/clerk.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Welcome to the Simple Website</h1>
-        </header>
-        <main>
-            <div id="sign-in"></div>
-            <p class="signup-link">Don't have an account? <a href="https://unique-minnow-52.accounts.dev/sign-up">Sign up here</a></p>
-            <div id="user-button"></div>
-        </main>
-    </div>
-    <script>
-        window.addEventListener('load', async function () {
-            const { Clerk } = window;
-            
-            await Clerk.load({
-                publishableKey: 'YOUR_CLERK_PUBLISHABLE_KEY_HERE'  // Замените на ваш ключ из Clerk dashboard
-            });
-
-            if (Clerk.user) {
-                document.getElementById('sign-in').style.display = 'none';
-                document.querySelector('.signup-link').style.display = 'none';
-            } else {
-                Clerk.mountSignIn(document.getElementById('sign-in'));
-            }
-
-            Clerk.mountUserButton(document.getElementById('user-button'));
-        });
-    </script>
+    <header>
+        <h1>Welcome to the Simple Website</h1>
+    </header>
+    <main>
+        <button id="loginButton">Login</button>
+        <br><br>
+        <a href="https://buy.stripe.com/test_6oU14f6fj55G4D011d7g400" target="_blank">
+            <button id="buyButton">Buy Now</button>
+        </a>
+    </main>
+    <script src="server.js"></script>
 </body>
 </html>
