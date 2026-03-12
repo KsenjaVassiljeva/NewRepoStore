@@ -1,22 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Простой сайт</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Simple Website</h1>
-    </header>
-    <main>
-        <button id="loginButton">Login</button>
-        <br><br>
-        <a href="https://buy.stripe.com/test_6oU14f6fj55G4D011d7g400" target="_blank">
-            <button id="buyButton">Buy Now</button>
-        </a>
-    </main>
-    <script src="server.js"></script>
+<div class="container">
+<header>
+    <h1>Добро пожаловать на простой сайт</h1>
+</header>
+<main>
+    <p>Нажмите одну из кнопок ниже, чтобы войти или сделать покупку.</p>
+
+    <button id="loginButton">Войти</button>
+
+    <a href="https://buy.stripe.com/test_6oU14f6fj55G4D011d7g400" target="_blank">
+        <button id="buyButton">Купить сейчас</button>
+    </a>
+
+    <div id="result"></div>
+</main>
+
+<footer>
+    <small>&copy; 2026 Simple Website</small>
+</footer>
+</div>
+
+<script src="client.js"></script>
+
 </body>
 </html>

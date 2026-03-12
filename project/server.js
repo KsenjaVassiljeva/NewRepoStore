@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 
+
 const app = express();
 
 app.use(express.json());
@@ -18,6 +19,21 @@ app.get('/api/info', (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase(
+  "http://pocketbase-zl9hsd9zdins8346q7v5fc4a.176.112.158.15.sslip.io"
+);
+
+app.get("/api/users", async (req, res) => {
+    try {
+        const users = await pb.collection('_pb_users_auth_').getFullList();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.get('/success', (req, res) => {

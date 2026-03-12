@@ -36,3 +36,19 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+p {
+    text-align: center;
+    color: #555;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+}
