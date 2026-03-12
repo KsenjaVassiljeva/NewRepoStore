@@ -1,14 +1,26 @@
+// Используем CommonJS
 const express = require("express");
 const path = require("path");
-
+const PocketBase = require("pocketbase/cjs");
 
 const app = express();
-
 app.use(express.json());
+app.use(express.static(__dirname));
 
+// Параметры из окружения
 const PORT = process.env.PORT || 3000;
+const PB_URL = process.env.PB_URL;
 const NIMI = process.env.MY_NAME || "Tundmatu nimi (Viga!)";
 
+if (!PB_URL) {
+    console.error("Ошибка: переменная окружения PB_URL не задана!");
+    process.exit(1);
+}
+
+// Подключение PocketBase
+const pb = new PocketBase(PB_URL);
+
+// Тестовый endpoint
 app.get('/api/info', (req, res) => {
     res.status(200).json({
         misioon: "Iseseisev deplomine edukas",
@@ -17,16 +29,7 @@ app.get('/api/info', (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-import PocketBase from 'pocketbase';
-
-const pb = new PocketBase(
-  "http://pocketbase-zl9hsd9zdins8346q7v5fc4a.176.112.158.15.sslip.io"
-);
-
+// Получение всех пользователей
 app.get("/api/users", async (req, res) => {
     try {
         const users = await pb.collection('_pb_users_auth_').getFullList();
@@ -36,6 +39,12 @@ app.get("/api/users", async (req, res) => {
     }
 });
 
+// Главная страница
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Успешная оплата
 app.get('/success', (req, res) => {
     const { session_id } = req.query;
     res.send(`
